@@ -24,11 +24,7 @@ class AccountApiTests(TestCase):
         # Creamos un objeto.
         Account.objects.create(
             currency='BTC',
-            balance = 0.00366963,
-            available = 0.00266963,
-            balance_local = 38.746779155,
-            available_local = 28.188009155,
-            rate = 10558.77
+            balance = 0.00366963
         )
         # Hacemos GET a la URI especificada para obtener la 'data' almacenada y el status code.
         res = self.client.get(ACCOUNTS_URL)
@@ -49,12 +45,9 @@ class AccountApiTests(TestCase):
         # Realizamos un POST con el contenido de la var 'payload'.
         payload = {
             "currency": "Ethereum",
-            "balance": 0.00157422,
-            "available": 0.00125564,
-            "balance_local": 21.635761155,
-            "available_local": 11.112229155,
-            "rate": 12661.21
+            "balance": 0.00157422
         }
+        
         self.client.post(ACCOUNTS_URL, payload)
 
         # Comprobación que devuelve un valor boolean si el objeto existe.

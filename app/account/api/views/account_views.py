@@ -14,5 +14,3 @@ class AccountViewSet(viewsets.GenericViewSet,
     def perform_create(self, serializer):
         # Crea una nueva 'account'.
         serializer.save()
-
-
