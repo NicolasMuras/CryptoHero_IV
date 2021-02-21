@@ -1,66 +1,35 @@
 from django.urls import reverse
-from django.test import TestCase
-
-from rest_framework import status
-from rest_framework.test import APIClient
-
+from core.tests.test_api_abstract import ApiTests
 from account.models import Account
-
 from account.api.serializers.account_serializers import AccountSerializer
 
 
-ACCOUNTS_URL = reverse('account:account-list')
+class AccountApiTests(ApiTests):
 
+    url = reverse('account:account-list')
+    Model = Account
+    serializer_class = AccountSerializer
 
-class AccountApiTests(TestCase):
-    # Testea
+    def test_retrieve_object(self):
 
-    def setUp(self):
-        self.client = APIClient()
-
-    def test_retrieve_account(self):
-        # Testea la devolución de un listado de objetos 'account'.
-
-        # Creamos un objeto.
-        Account.objects.create(
+        self.Model.objects.create(
             currency='BTC',
             balance = 0.00366963
         )
-        # Hacemos GET a la URI especificada para obtener la 'data' almacenada y el status code.
-        res = self.client.get(ACCOUNTS_URL)
-        account = Account.objects.all().order_by('-currency')
 
-        # Utilizamos el objeto account para pasarlo al serializador y devolver un JSON.
-        serializer = AccountSerializer(account, many=True)
+        objeto = self.Model.objects.all().order_by('-id')
 
-        # Comprobamos que el status sea 200.
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
+    def test_create_object_successfull(self):
 
-        # Comprobamos que los datos devueltos en el GET Request y en el serializador sean los mismos.
-        self.assertEqual(res.data, serializer.data)
-
-    def test_create_account_successfull(self):
-        # Testea que se cree con exito una nueva 'account'.
-
-        # Realizamos un POST con el contenido de la var 'payload'.
         payload = {
             "currency": "Ethereum",
             "balance": 0.00157422
         }
-        
-        self.client.post(ACCOUNTS_URL, payload)
 
-        # Comprobación que devuelve un valor boolean si el objeto existe.
-        exists = Account.objects.filter(
+        exists = self.Model.objects.filter(
             currency = payload['currency']
         ).exists()
 
-        # Comprobación final utilizando var 'exists'.
-        self.assertTrue(exists)
 
-    def test_create_account_invalid(self):
-        # Testeamos la creación de una 'account' con un valor invalido.
+    def test_create_object_invalid(self):
         payload = {'currency': ''}
-        res = self.client.post(ACCOUNTS_URL, payload)
-        
-        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

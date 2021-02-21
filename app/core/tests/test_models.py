@@ -4,6 +4,7 @@ from account.models import Account
 from transaction.models import Transaction
 from block.models import Block
 
+
 class ModelTests(TestCase):
 
     def test_account_str(self):
