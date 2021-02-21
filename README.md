@@ -1,4 +1,4 @@
-<h1> CryptoHero IV: RIPCOIN </h1>
+<h1> CryptoHero IV: Ripcoin </h1>
 
 ![alt text](https://github.com/NicolasMuras/CryptoHero_IV/blob/master/images/hierarchy.jpg?raw=true)
 
