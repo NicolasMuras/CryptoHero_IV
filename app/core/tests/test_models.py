@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from account.models import Account
 from transaction.models import Transaction
-
+from block.models import Block
 
 class ModelTests(TestCase):
 
@@ -27,3 +27,15 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(transaction), transaction.txhash)
+
+    def test_block_str(self):
+        
+        block = Block.objects.create(
+            sequence_id = 0,
+            transaction_list = '',
+            status = False,
+            merkle_root = '',
+            block_hash = ''
+        )
+
+        self.assertEqual(str(block), str(block.sequence_id))

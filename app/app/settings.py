@@ -34,6 +34,7 @@ LOCAL_APPS = [
     'core',
     'account',
     'transaction',
+    'block',
 ]
 
 THIRD_APPS = [    

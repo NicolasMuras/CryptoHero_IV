@@ -1,4 +1,4 @@
-import hashlib
+
 from rest_framework import serializers
 
 from transaction.models import Transaction
