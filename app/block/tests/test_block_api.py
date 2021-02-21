@@ -1,5 +1,4 @@
 from django.urls import reverse
-
 from core.tests.test_api_abstract import ApiTests
 from block.models import Block
 from block.api.serializers.block_serializers import BlockSerializer
