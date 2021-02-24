@@ -9,5 +9,6 @@ router.register('transactions', transaction_views.TransactionViewSet)
 app_name = 'transaction'
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('transactions/latest-transaction/', transaction_views.HelperTransactionAPIView.as_view(), name='latest-transaction')
 ]

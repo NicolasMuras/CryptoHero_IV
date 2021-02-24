@@ -32,8 +32,6 @@ class ModelTests(TestCase):
     def test_block_str(self):
         
         block = Block.objects.create(
-            sequence_id = 0,
-            transaction_list = '',
             status = False,
             merkle_root = '',
             block_hash = ''
